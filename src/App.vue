@@ -1,16 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <MemberInfo />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MemberInfo from "@/components/veiw/memberRegister/MemberInfo";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    MemberInfo,
+  },
+  data(){
+    return {userName: ''}
+  },
 }
 </script>
 
