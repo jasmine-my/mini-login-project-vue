@@ -1,18 +1,21 @@
 <template>
   <div class="inputWrap">
-    <h3 v-if="title">{{title}}: </h3>
-    <input type="text"
-           id="inputId" @input="$emit('inputValueChange', $event)"
-    />
+    <div>
+      <label v-if="title" >{{title}}: </label>
+      <input type="inputType"
+             id="inputId" @input="$emit('inputValueChange', $event)" />
+    </div>
+    <span class="errorMessage" v-if="!isError">{{errorMessage}}</span>
   </div>
-  <p v-if="!isError">{{errorMessage}}</p>
 </template>
 
 <script>
 export default {
   name: 'MyInput',
+  emits: ['inputValueChange'],
   props: {
     title: String,
+    inputType: String,
     inputId: String,
     errorMessage: String,
     isError: Boolean
@@ -31,10 +34,21 @@ export default {
   }
   input:is(:active, :hover, :focus) {
     border-color: #42b983;
+    transition: all 0.3s;
+  }
+  label {
+    font-weight: 700;
   }
   .inputWrap {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
+    margin-top: 30px;
+  }
+  .errorMessage {
+    color: indianred;
+    display: inline-block;
+    margin-top: 10px;
   }
 </style>

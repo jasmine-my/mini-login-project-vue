@@ -1,5 +1,7 @@
 <template>
-  <MemberInfo />
+  <div id="myApp">
+    <MemberInfo />
+  </div>
 </template>
 
 <script>
@@ -17,12 +19,24 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#myApp {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 10px 50px 30px 50px;
+  background: #dae5da;
 }
+
+#submitBtn {
+  margin-top: 50px;
+  background: rgba(66, 185, 131);
+  border-radius: 30px;
+  padding: 3px 20px;
+  color: white;
+  border: none;
+}
+#submitBtn:is(:hover,:active,:focus) {
+  background: #308f62;
+  transition: all 0.3s;
+}
+
 </style>
