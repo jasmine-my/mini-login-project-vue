@@ -94,6 +94,20 @@ export default {
           this.address.roadAddr = fullRoadAddr;
         }
       }).open()
+    },
+    computed: {
+      checkIsName(){
+        const reg_name = /^([가-힣]{2,})|([a-zA-Z]{3,})$/g;
+        if(this.userName.length > 0) {
+          return reg_name.test(this.userName)
+        } else return true;
+      },
+      checkIsContract(){
+        const reg_contract = /^(0+)\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/g;
+        if(this.userContract.length > 0){
+          return reg_contract.test(this.userContract);
+        } else return true;
+      }
     }
   },
 }
