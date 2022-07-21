@@ -1,5 +1,4 @@
 <template>
-  <!--      TODO-->
   <h1>개인 정보</h1>
   <form id="userInfo" action="console.log('통과)" >
     <MyInput
@@ -45,13 +44,13 @@ export default {
       userEmail: '',
       userPW: '',
       userConfirmPW: '',
-      next: false,
+      confirmForm: false,
     }
   },
   methods: {
     checkForm: function() {
-      if(this.userEmail && this.userPW && this.userPW === this.userConfirmPW) {
-            return true
+      if(this.checkIsEmail && this.checkIsPW && this.checkIsConfirmPW) {
+            this.confirmForm = true
       }
     }
   },
@@ -71,7 +70,7 @@ export default {
     checkIsConfirmPW(){
       const reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!#%*?&])[A-Za-z$@#!%*?&]{8,}$/;
       if(this.userConfirmPW.length > 0) {
-        return reg_pw.test(this.userConfirmPW) && this.userConfirmPW === this.userPW;
+        return reg_pw.test(this.userConfirmPW) && (this.userConfirmPW === this.userPW);
       } else return true;
     },
   }

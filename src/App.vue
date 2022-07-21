@@ -1,16 +1,19 @@
 <template>
   <div id="myApp">
-    <MemberInfo />
+<!--    <MemberInfo />-->
+    <DeliveryInfo />
   </div>
 </template>
 
 <script>
-import MemberInfo from "@/components/veiw/memberRegister/MemberInfo";
+// import MemberInfo from "@/components/veiw/memberRegister/MemberInfo";
+import DeliveryInfo from "@/components/veiw/memberRegister/DeliveryInfo";
 
 export default {
   name: 'App',
   components: {
-    MemberInfo,
+    DeliveryInfo,
+    // MemberInfo,
   },
   data(){
     return {userName: ''}
@@ -27,7 +30,7 @@ export default {
 }
 
 #submitBtn {
-  margin-top: 50px;
+  margin-top: 100px;
   background: rgba(66, 185, 131);
   border-radius: 30px;
   padding: 3px 20px;

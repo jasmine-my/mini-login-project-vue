@@ -1,9 +1,9 @@
 <template>
   <div class="inputWrap">
-    <div>
-      <label v-if="title" >{{title}}: </label>
-      <input type="inputType"
-             id="inputId" @input="$emit('inputValueChange', $event)" />
+    <div class="inputBox">
+      <label v-if="title" >{{title}} </label>
+      <input type={{inputType}}
+             id="{{inputId}}" @input="$emit('inputValueChange', $event)" />
     </div>
     <span class="errorMessage" v-if="!isError">{{errorMessage}}</span>
   </div>
@@ -18,7 +18,8 @@ export default {
     inputType: String,
     inputId: String,
     errorMessage: String,
-    isError: Boolean
+    isError: Boolean,
+    placeholder: String
   },
   data(){
     return {
@@ -45,6 +46,11 @@ export default {
     justify-content: center;
     align-items: start;
     margin-top: 30px;
+  }
+  .inputBox {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 30% 70%;
   }
   .errorMessage {
     color: indianred;
