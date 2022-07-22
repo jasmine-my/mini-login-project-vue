@@ -6,6 +6,15 @@
 메일 주소: yeunk0206@gmail.com
 ```
 
+### 배운 점
+- Vue.js 작업을 처음 해보면서 데이터의 전달 방식, 흐름을 알 수 있었다.
+- Vue는 코드 컨벤션을 따로 정할 필요 없이 정해진 문법이 있기 때문에 React 보다 협업하기 좋을것 같다.
+
+### 아쉬웠던 점
+- 지금은 <script>안에서 data와 method, computed로 데이터가 실시간으로 변경되도록 만들었는데 다음에는 composition api를 이용해서 react처럼 state와 해당 state를 변경하는 setter를 같이 묶어서 표현해보고 싶다,
+- Vue에서 전역 변수를 다루는 방법을 좀 더 배우고 싶다.
+- vue-router로 라우팅 구현을 해보고 싶다.
+
 ### 화면 이동 및 데이터 전달 설계 
 ```mermaid
 graph TD;
@@ -39,15 +48,6 @@ graph TD;
 ├── main.js
 └── utils
 ```
-
-### 배운 점
-- Vue.js 작업을 처음 해보면서 데이터의 전달 방식, 흐름을 알 수 있었다.
-- Vue는 코드 컨벤션을 따로 정할 필요 없이 정해진 문법이 있기 때문에 React 보다 협업하기 좋을것 같다.
-
-### 아쉬웠던 점
-- 지금은 <script>안에서 data와 method, computed로 데이터가 실시간으로 변경되도록 만들었는데 다음에는 composition api를 이용해서 react처럼 state와 해당 state를 변경하는 setter를 같이 묶어서 표현해보고 싶다,
-- Vue에서 전역 변수를 다루는 방법을 좀 더 배우고 싶다.
-- vue-router로 라우팅 구현을 해보고 싶다.
 
 ### 개발 서버 확인 명령어
 ```
