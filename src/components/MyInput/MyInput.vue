@@ -2,9 +2,10 @@
   <div class="inputWrap">
     <div class="inputBox">
       <label v-if="title" >{{title}} </label>
-      <input type={{inputType}}
-             id="{{inputId}}" @input="$emit('inputValueChange', $event)" />
+      <input :type="inputType"
+             @input="$emit('inputValueChange', $event)" />
     </div>
+    {{inputType}}
     <span class="errorMessage" v-if="!isError">{{errorMessage}}</span>
   </div>
 </template>
@@ -37,6 +38,12 @@ export default {
     border-color: #42b983;
     transition: all 0.3s;
   }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   label {
     font-weight: 700;
   }
