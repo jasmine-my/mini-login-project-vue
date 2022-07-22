@@ -5,7 +5,6 @@
       <input :type="inputType"
              @input="$emit('inputValueChange', $event)" />
     </div>
-    {{inputType}}
     <span class="errorMessage" v-if="!isError">{{errorMessage}}</span>
   </div>
 </template>

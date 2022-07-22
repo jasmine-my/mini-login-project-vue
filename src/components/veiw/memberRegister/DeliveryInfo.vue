@@ -1,33 +1,36 @@
 <template>
-  <h1>배송 정보</h1>
-  <form id="userInfo" action="console.log('통과)" >
+  <h1 class="header">배송 정보</h1>
+  <form id="userInfo" >
     <MyInput
         @inputValueChange="userName = $event.target.value"
         :title="'👤 이름'"
         :error-message="'한글 2글자 이상 또는 영문 3글자 이상 입력해주세요'"
         :input-id="'user-name'"
-        :input-type="text"
+        :input-type="'text'"
         :is-error="checkIsName"
     />
 
     <MyInput
         @inputValueChange="userContract = $event.target.value"
         :title="'📞 연락처'"
-        :error-message="'비밀번호 형식이 잘못되었습니다'"
+        :error-message="'연락처 형식이 잘못되었습니다'"
         :input-id="'user-password'"
-        :input-type="text"
+        :input-type="'tel'"
         :is-error="checkIsContract"
     />
-    <div>
+    <div class="addressBox">
       <div class="findAddress">
         <span>🏠 주소</span>
-        <button type="button" @click="showApi">주소 검색</button>
+        <button type="button" @click="showApi" class="btn">주소 검색</button>
       </div>
       <input type="text" :value="address.roadAddr" id="address-roadAddr" class="address" disabled>
       <input type="text" :placeholder="'상세주소'" @change="address.detailAddr = $event.target.value" id="address-detailAddr" class="address">
     </div>
 
-    <button id="submitBtn" type="submit" @click.prevent="checkForm">다음</button>
+    <div class="buttonWrap">
+      <button class="btn prevBtn" type="button" @click.prevent="()=>this.$emit('changeCurrentViewSeq', 0)">이전</button>
+      <button class="btn submitBtn" type="submit" @click.prevent="checkForm">다음</button>
+    </div>
   </form>
 </template>
 
@@ -39,6 +42,10 @@ export default {
     MyInput
   },
   name: 'DeliveryInfo',
+  emits: ['changeCurrentViewSeq', 'setName', 'setContract', 'setAddress'],
+  props: {
+    currentViewSeq: Number,
+  },
   data(){
     return {
       userName: '',
@@ -49,17 +56,22 @@ export default {
         extraAddr: '',
         detailAddr: ''
       },
-      confirmForm: false,
-      zip: '',
-      addr1: '',
-      addr2: '',
+      isConfirmForm: false,
     }
   },
   methods: {
     checkForm: function() {
-      if(this.checkIsName && this.checkIsContract) {
-        this.confirmForm = true
-      }
+      if(
+          this.userName.length > 0 && this.checkIsName
+          && this.userContract.length > 0 && this.checkIsContract
+          && this.address.roadAddr.length > 0
+      ) {
+          this.isConfirmForm = true
+          this.$emit('changeCurrentViewSeq', 2)
+          this.$emit('setName', this.userName)
+          this.$emit('setContract', this.userContract)
+          this.$emit('setAddress', this.address.roadAddr + ' ' + this.address.detailAddr)
+      } else this.isConfirmForm = false
     },
     showApi() {
       new window.daum.Postcode({
@@ -94,29 +106,26 @@ export default {
           this.address.roadAddr = fullRoadAddr;
         }
       }).open()
-    },
-    computed: {
-      checkIsName(){
-        const reg_name = /^([가-힣]{2,})|([a-zA-Z]{3,})$/g;
-        if(this.userName.length > 0) {
-          return reg_name.test(this.userName)
-        } else return true;
-      },
-      checkIsContract(){
-        const reg_contract = /^(0+)\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/g;
-        if(this.userContract.length > 0){
-          return reg_contract.test(this.userContract);
-        } else return true;
-      }
     }
   },
+  computed: {
+    checkIsName(){
+      const reg_name = /^([가-힣]{2,})|([a-zA-Z]{3,})$/g;
+      if(this.userName.length > 0) {
+        return reg_name.test(this.userName)
+      } else return true;
+    },
+    checkIsContract(){
+      const reg_contract = /^(0+)\d{2,3}[- ]?\d{3,4}[- ]?\d{4}$/g;
+      if(this.userContract.length > 0){
+        return reg_contract.test(this.userContract);
+      } else return true;
+    }
+  }
 }
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-}
 .findAddress {
   display: flex;
   font-weight: 700;
@@ -124,7 +133,7 @@ h1 {
   justify-content: space-between;
 }
 .address {
-  width: 70%;
+  width: 68%;
   float: right;
   margin-top: 10px;
   border: 2px solid #2c3e50;

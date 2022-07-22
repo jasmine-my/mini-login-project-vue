@@ -1,5 +1,5 @@
 <template>
-  <h1>카드 정보</h1>
+  <h1 class="header">카드 정보</h1>
   <form id="userInfo" action="console.log('통과')" >
     <div class="cardRegiNumWrap">
       <input type="number" v-model="cardRegiNum[0]" @input="(e)=>numberMaxLength4(e.target.value,1)">
@@ -15,7 +15,6 @@
       <div />
       <button class="btn submitBtn" type="submit" @click.prevent="checkForm">완료</button>
     </div>
-    {{isConfirmForm}}
   </form>
 </template>
 
@@ -23,6 +22,10 @@
 
 export default {
   name: 'CreditCardReginum',
+  emits: ['changeCurrentViewSeq'],
+  props: {
+    currentViewSeq: Number,
+  },
   data(){
     return {
       cardRegiNum: [[],[],[],[]],
@@ -56,6 +59,7 @@ export default {
 
         if(convertCardRegiNum.reduce(sumArray, 0) % 10 === 0) {
           this.isConfirmForm = true;
+          this.$emit('changeCurrentViewSeq', 3)
         }
       }
     },
@@ -68,9 +72,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-}
 .cardRegiNumWrap {
   display: grid;
   grid-template-columns: 1fr 0.3fr 1fr 0.3fr 1fr 0.3fr 1fr;

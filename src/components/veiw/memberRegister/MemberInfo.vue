@@ -1,12 +1,12 @@
 <template>
-  <h1>개인 정보</h1>
-  <form id="userInfo" action="console.log('통과)" >
+  <h1 class="header">개인 정보</h1>
+  <form id="userInfo" >
     <MyInput
         @inputValueChange="userEmail = $event.target.value"
         :title="'📧 이메일'"
         :error-message="'이메일 형식이 잘못되었습니다'"
         :input-id="'user-email'"
-        :input-type="text"
+        :input-type="'email'"
         :is-error="checkIsEmail"
     />
 
@@ -15,7 +15,7 @@
         :title="'🔑비밀번호'"
         :error-message="'비밀번호 형식이 잘못되었습니다'"
         :input-id="'user-password'"
-        :input-type="password"
+        :input-type="'text'"
         :is-error="checkIsPW"
     />
 
@@ -24,10 +24,13 @@
         :title="'✔비밀번호 확인'"
         :error-message="'비밀번호와 일치하지 않습니다'"
         :input-id="'user-confirm-password'"
-        :input-type="password"
+        :input-type="'text'"
         :is-error="checkIsConfirmPW"
     />
-    <button id="submitBtn" type="submit" @click.prevent="checkForm">다음</button>
+    <div class="buttonWrap">
+      <div />
+      <button class="btn submitBtn" type="submit" @click.prevent="checkForm">다음</button>
+    </div>
   </form>
   </template>
 
@@ -39,18 +42,21 @@ export default {
     MyInput
   },
   name: 'MemberInfo',
+  emits: ['changeCurrentViewSeq', 'setEmail'],
   data(){
     return {
       userEmail: '',
       userPW: '',
       userConfirmPW: '',
-      confirmForm: false,
+      isConfirmForm: false,
     }
   },
   methods: {
     checkForm: function() {
       if(this.checkIsEmail && this.checkIsPW && this.checkIsConfirmPW) {
-            this.confirmForm = true
+          this.isConfirmForm = true;
+          this.$emit('changeCurrentViewSeq', 1);
+          this.$emit('setEmail', this.userEmail);
       }
     }
   },
@@ -59,26 +65,23 @@ export default {
       const reg_email = /^([0-9a-zA-Z_-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
       if(this.userEmail.length > 0) {
         return reg_email.test(this.userEmail)
-      } else return true;
+      } else return false;
     },
     checkIsPW(){
       const reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!#%*?&])[A-Za-z$@#!%*?&]{8,}$/;
       if(this.userPW.length > 0){
         return reg_pw.test(this.userPW);
-      } else return true;
+      } else return false;
     },
     checkIsConfirmPW(){
       const reg_pw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!#%*?&])[A-Za-z$@#!%*?&]{8,}$/;
       if(this.userConfirmPW.length > 0) {
         return reg_pw.test(this.userConfirmPW) && (this.userConfirmPW === this.userPW);
-      } else return true;
+      } else return false;
     },
   }
 }
 </script>
 
 <style scoped>
-  h1 {
-    text-align: center;
-  }
 </style>
