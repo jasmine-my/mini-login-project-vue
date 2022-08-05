@@ -3,7 +3,7 @@
     <MemberInfo v-if="currentViewSeq === 0" @changeCurrentViewSeq="changeCurrentViewSeq" @setEmail="setEmail"/>
     <DeliveryInfo v-if="currentViewSeq === 1" @changeCurrentViewSeq="changeCurrentViewSeq" @setName="setName" @setContract="setContract" @setAddress="setAddress"/>
     <CreditCardReginum v-if="currentViewSeq === 2" @changeCurrentViewSeq="changeCurrentViewSeq"/>
-    <OnSuccess :name="name" :email="email" :address="address" :contract="contract" />
+    <OnSuccess v-if="currentViewSeq === 3" :name="name" :email="email" :address="address" :contract="contract" />
   </div>
 </template>
 
